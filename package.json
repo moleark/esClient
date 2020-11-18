@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/moleark/esClient/issues"
   },
-  "homepage": "https://github.com/moleark/esClient#readme"
+  "homepage": "https://github.com/moleark/esClient#readme",
+  "dependencies": {
+    "@elastic/elasticsearch": "~7.10.0"
+  }
 }
