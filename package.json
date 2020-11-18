@@ -1,0 +1,19 @@
+{
+  "name": "esclient",
+  "version": "1.0.0",
+  "description": "elasticsearch client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moleark/esClient.git"
+  },
+  "author": "ligsh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moleark/esClient/issues"
+  },
+  "homepage": "https://github.com/moleark/esClient#readme"
+}
