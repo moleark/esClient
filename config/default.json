@@ -1,4 +1,13 @@
 {
+    "connection": {
+        "host": "",
+        "port": "",
+        "user": "",
+        "password": "",
+        "multipleStatements": true,
+        "database": "productx"
+    },
+    "database": "",
     "esbaseurl": "",
     "indices" : {
         "products": {
@@ -8,29 +17,18 @@
                 },
                 "mappings": {
                     "properties": {
-                        "origin": {
-                            "type": "keyword"
-                        },
-                        "cas": {
-                            "type": "keyword"
-                        },
-                        "casint": {
-                            "type": "keyword"
-                        },
-                        "description": {
-                            "type": "text"
-                        },
+                        "origin": { "type": "keyword" },
+                        "cas": { "type": "keyword" },
+                        "casint": { "type": "keyword" },
+                        "description": { "type": "text" },
                         "descriptionc": {
                             "type": "text",
                             "analyzer": "ik_max_word",
                             "search_analyzer": "ik_smart"
                         },
-                        "hasstock": {
-                            "type": "boolean"
-                        },
-                        "level": {
-                            "type": "integer"
-                        }
+                        "mdlnumber": { "type": "keyword" },
+                        "hasstock": { "type": "integer" },
+                        "level": { "type": "integer" }
                     }
                 }
             }
