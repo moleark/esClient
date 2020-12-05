@@ -4,10 +4,12 @@
         "port": "",
         "user": "",
         "password": "",
-        "multipleStatements": true,
-        "database": "productx"
+        "multipleStatements": true
     },
-    "database": "",
+    "database": {
+        "product": "product$test", 
+        "chemical": "chemical$test"
+    },
     "esbaseurl": "",
     "indices" : {
         "products": {
@@ -19,7 +21,6 @@
                     "properties": {
                         "origin": { "type": "keyword" },
                         "cas": { "type": "keyword" },
-                        "casint": { "type": "keyword" },
                         "description": { "type": "text" },
                         "descriptionc": {
                             "type": "text",
@@ -27,11 +28,21 @@
                             "search_analyzer": "ik_smart"
                         },
                         "mdlnumber": { "type": "keyword" },
+                        "molecularfomula": { "type": "keyword" },
+                        "molecularweight": { 
+                            "type": "scaled_float",
+                            "scaling_factor": 1000
+                        },
+                        "salesregion": { "type": "integer" },
                         "hasstock": { "type": "integer" },
                         "level": { "type": "integer" }
                     }
                 }
             }
         }
+    },
+    "index_batch_size": 100,
+    "//":{
+        "cas": "CAS的处理方式：es中存储带有-的CAS，查询关键字也统一转换为带-的格式，达到查结果不再转换的目的"
     }
 }

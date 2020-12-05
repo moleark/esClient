@@ -18,14 +18,21 @@ const client = new Client({ node: node });
         if (products && products.length > 0) {
             for (let i = 0; i < products.length; i++) {
                 let product = products[i];
-                let { id, casint } = product;
-                if (casint) {
-                    let icas = Number.parseInt(casint, 10);
+                let { id, cas } = product;
+                if (cas) {
+                    let icas = Number.parseInt(cas, 10);
                     if (!isNaN(icas)) {
                         product.cas = cas2string(icas);
                     }
                 }
                 endPointer = product["id"];
+                let doc: RequestParams.Index = {
+                    id: id,
+                    index: "products",
+                    body: JSON.stringify(product)
+                }
+                promises.push(client.index(doc))
+                /*
                 let { body: exists } = await client.exists({
                     "index": "products",
                     "id": id
@@ -39,6 +46,7 @@ const client = new Client({ node: node });
                     // create doc 
                     promises.push(client.create(doc));
                 }
+                */
             }
             console.log(new Date() + ': begin: ' + pointer + '; end: ' + endPointer + '; number added to es: ' + promises.length);
             if (promises.length > 0) {
