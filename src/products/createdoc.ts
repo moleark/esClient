@@ -1,7 +1,6 @@
 import { Client, ApiResponse, RequestParams } from '@elastic/elasticsearch';
 import config from 'config';
 import { getProducts } from './db';
-import { cas2string } from './utils';
 
 const node = config.get<string>('esbaseurl');
 
@@ -18,13 +17,14 @@ const client = new Client({ node: node });
         if (products && products.length > 0) {
             for (let i = 0; i < products.length; i++) {
                 let product = products[i];
-                let { id, cas } = product;
-                if (cas) {
-                    let icas = Number.parseInt(cas, 10);
-                    if (!isNaN(icas)) {
-                        product.cas = cas2string(icas);
-                    }
-                }
+                let { id, brandId, brandName, molecularweight } = product;
+                product.brand = { id: brandId, name: brandName };
+                delete product.brandId;
+                delete product.brandName;
+                if (Number.isNaN(Number.parseFloat(molecularweight)))
+                    product.molecularweight = undefined;
+                else
+                    product.molecularweight = Number.parseFloat(molecularweight);
                 endPointer = product["id"];
                 let doc: RequestParams.Index = {
                     id: id,

@@ -8,6 +8,5 @@ const client = new Client({ node: node });
 (async () => {
 
     const index: RequestParams.IndicesCreate = config.get<RequestParams.IndicesCreate>("indices.products")
-    console.log(JSON.stringify(index));
     await client.indices.create(index);
 })();
