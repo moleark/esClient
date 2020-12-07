@@ -17,14 +17,14 @@ const client = new Client({ node: node });
         if (products && products.length > 0) {
             for (let i = 0; i < products.length; i++) {
                 let product = products[i];
-                let { id, brandId, brandName, molecularweight } = product;
+                let { id, brandId, brandName, molecularWeight } = product;
                 product.brand = { id: brandId, name: brandName };
                 delete product.brandId;
                 delete product.brandName;
-                if (Number.isNaN(Number.parseFloat(molecularweight)))
-                    product.molecularweight = undefined;
+                if (Number.isNaN(Number.parseFloat(molecularWeight)))
+                    product.molecularWeight = undefined;
                 else
-                    product.molecularweight = Number.parseFloat(molecularweight);
+                    product.molecularWeight = Number.parseFloat(molecularWeight);
                 endPointer = product["id"];
                 let doc: RequestParams.Index = {
                     id: id,

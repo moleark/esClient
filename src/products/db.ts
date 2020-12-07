@@ -7,8 +7,8 @@ const indexBatchSize = config.get<number>("index_batch_size");
 
 export async function getProducts(pointer: number, salesregion: number) {
 
-        let sql = ` select b.id, bd.id as brandId, bd.name as brandName, b.origin, pc.cas, b.description, b.descriptionc, c.mdlnumber
-            , pc.purity, pc.molecularfomula, pc.molecularweight, pc.chemical, a.salesregion, a.hasstock, a.level, b.no
+        let sql = ` select b.id, bd.id as brandId, bd.name as brandName, b.origin, pc.CAS, b.description, b.descriptionC, c.mdlnumber
+            , pc.purity, pc.molecularFomula, pc.molecularWeight, pc.chemical, a.salesRegion, a.hasstock, a.level, b.no
             from	\`${dbProduct}\`.tv_productcache a
                     inner join \`${dbProduct}\`.tv_productx b on a.$unit = b.$unit and a.product = b.id
                     inner join \`${dbProduct}\`.\`tv_productchemical\` pc on pc.$unit = b.$unit and pc.product = b.id
