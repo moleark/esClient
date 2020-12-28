@@ -29,7 +29,7 @@
                         },
                         "origin": { "type": "keyword" },
                         "CAS": { "type": "keyword" },
-                        "description": { "type": "text" },
+                        "description": { "type": "wildcard" },
                         "descriptionC": {
                             "type": "text",
                             "analyzer": "ik_max_word",
