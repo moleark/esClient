@@ -30,11 +30,7 @@
                         "origin": { "type": "keyword" },
                         "CAS": { "type": "keyword" },
                         "description": { "type": "wildcard" },
-                        "descriptionC": {
-                            "type": "text",
-                            "analyzer": "ik_max_word",
-                            "search_analyzer": "ik_smart"
-                        },
+                        "descriptionC": { "type": "wildcard" },
                         "purity": { "type": "keyword", "index": false },
                         "mdlnumber": { "type": "keyword" },
                         "molecularFomula": { "type": "keyword" },
@@ -54,6 +50,11 @@
     },
     "index_batch_size": 100,
     "//":{
-        "cas": "CAS的处理方式：es中存储带有-的CAS，查询关键字也统一转换为带-的格式，达到查结果不再转换的目的"
+        "cas": "CAS的处理方式：es中存储带有-的CAS，查询关键字也统一转换为带-的格式，达到查结果不再转换的目的",
+        "descriptionC": {
+            "type": "text",
+            "analyzer": "ik_max_word",
+            "search_analyzer": "ik_smart"
+        }
     }
 }
