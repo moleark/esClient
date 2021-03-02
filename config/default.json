@@ -46,6 +46,20 @@
                     }
                 }
             }
+        },
+        "productproductcatalog": {
+            "index": "productproductcatalog",
+            "body": {
+                "mappings": {
+                    "dynamic":false,
+                    "properties": {
+                        "salesRegion": { "type": "integer" },
+                        "catalog": { "type": "integer" },
+                        "product": { "type": "integer" },
+                        "order": { "type": "integer", "index": false }
+                    }
+                }
+            }
         }
     },
     "index_batch_size": 100,
