@@ -1,12 +1,16 @@
 import { execSql } from '../mysql/tools';
 import config from 'config';
 
+/*
 const dbProduct = config.get<string>("database.product");
 const dbChemical = config.get<string>("database.chemical");
 const indexBatchSize = config.get<number>("index_batch_size");
+*/
 
 export async function getProducts(pointer: number, salesregion: number) {
 
+        let sql = config.get<string[]>("sqls.products").join(' ');
+        /*
         let sql = `select b.id, bd.id as brandId, bd.name as brandName, b.origin, pc.CAS, b.description, b.descriptionC, c.mdlnumber
             , pc.purity, pc.molecularFomula, pc.molecularWeight, pc.chemical, a.salesRegion, a.hasstock, a.level, b.no
             from	\`${dbProduct}\`.tv_productcache a
@@ -17,20 +21,24 @@ export async function getProducts(pointer: number, salesregion: number) {
             where   a.$unit = 24 and a.product > ${pointer} and a.salesregion = ${salesregion}
             order by a.product
             limit ${indexBatchSize};`;
-        let result = await execSql(sql);
+        */
+        let result = await execSql(sql, [pointer, salesregion]);
         if (result && result.length > 0)
                 return result;
 }
 
 export async function getProductProductCatalog(pointer: number, salesregion: number) {
 
+        let sql = config.get<string[]>("sqls.productproductcatalog").join(" ");
+        /*
         let sql = ` select salesregion, category as catalog, \`order\`, product, a.category * 100000000 + a.product as id
             from	\`${dbProduct}\`.tv_productproductcategorycache a
             where   a.$unit = 24 and a.salesregion = ${salesregion}
                     and a.category * 100000000 + a.product > ${pointer}
             order by a.category * 100000000 + a.product
             limit ${indexBatchSize};`;
-        let result = await execSql(sql);
+        */
+        let result = await execSql(sql, [salesregion, pointer]);
         if (result && result.length > 0)
                 return result;
 }

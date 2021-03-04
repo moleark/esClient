@@ -63,6 +63,27 @@
         }
     },
     "index_batch_size": 100,
+    "sqls": {
+        "products": ["select b.id, bd.id as brandId, bd.name as brandName, b.origin, pc.CAS, b.description, b.descriptionC, c.mdlnumber ",
+            ", pc.purity, pc.molecularFomula, pc.molecularWeight, pc.chemical, a.salesRegion, a.hasstock, a.level, b.no ",
+            "from product$test.tv_productcache a ",
+                    "inner join product$test.tv_productx b on a.$unit = b.$unit and a.product = b.id ",
+                    "inner join product$test.tv_productchemical pc on pc.$unit = b.$unit and pc.product = b.id ",
+                    "inner join chemical$test.tv_chemical c on c.$unit = pc.$unit and c.id = pc.chemical ",
+                    "inner join product$test.tv_brand bd on bd.$unit = b.$unit and bd.id = b.brand ",
+            "where   a.$unit = 24 and a.product > ? and a.salesregion = ? ",
+            "order by a.product ",
+            "limit 500;"
+        ],
+        "productproductcatalog": [
+            "select `order` as id, salesregion, category as catalog, `order`, product ", 
+            "from product$test.tv_productproductcategorycache a ",
+            "where   a.$unit = 24 and a.salesregion = ? ", 
+            "and `order` > ? ",
+            " order by `order` ",
+            "limit 500;"
+        ]
+    },
     "//":{
         "cas": "CAS的处理方式：es中存储带有-的CAS，查询关键字也统一转换为带-的格式，达到查结果不再转换的目的",
         "descriptionC": {
