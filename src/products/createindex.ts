@@ -15,4 +15,5 @@ const client = new Client({ node: node });
     }
     else
         console.error(`index: ${indexName} not defined.`);
+    process.exit();
 })();

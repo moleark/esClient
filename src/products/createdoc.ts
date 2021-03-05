@@ -113,4 +113,5 @@ async function createCatalogDoc() {
         }
     }
     console.log('end at ' + new Date());
+    process.exit();
 };
