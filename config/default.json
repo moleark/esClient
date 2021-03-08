@@ -16,6 +16,15 @@
             "index": "products",
             "body": {
                 "settings": {
+                    "analysis": {
+                        "normalizer": {
+                            "my_lowercase" : {
+                                "type": "custom",
+                                "char_filter": [],
+                                "filter": ["lowercase"]
+                            }
+                        }
+                    }
                 },
                 "mappings": {
                     "dynamic": false,
@@ -24,21 +33,21 @@
                         "brand": { 
                             "properties": {
                                 "id": { "type": "integer" },
-                                "name": { "type": "keyword" }
+                                "name": { "type": "keyword", "normalizer": "my_lowercase"}
                             }
                         },
-                        "origin": { "type": "keyword" },
+                        "origin": { "type": "keyword", "normalizer": "my_lowercase" },
                         "CAS": { "type": "keyword" },
                         "description": { "type": "wildcard" },
                         "descriptionC": { "type": "wildcard" },
                         "purity": { "type": "keyword", "index": false },
-                        "mdlnumber": { "type": "keyword" },
-                        "molecularFomula": { "type": "keyword" },
+                        "mdlnumber": { "type": "keyword", "normalizer": "my_lowercase" },
+                        "molecularFomula": { "type": "keyword", "normalizer": "my_lowercase" },
                         "molecularWeight": { 
                             "type": "scaled_float",
                             "scaling_factor": 1000
                         },
-                        "no": { "type": "keyword" },
+                        "no": { "type": "keyword", "normalizer": "my_lowercase" },
                         "chemical": { "type": "long", "index": false },
                         "salesRegion": { "type": "integer" },
                         "hasstock": { "type": "integer", "index": false },
@@ -54,7 +63,7 @@
                     "dynamic":false,
                     "properties": {
                         "salesRegion": { "type": "integer" },
-                        "catalog": { "type": "integer" },
+                        "catalog": { "type": "keyword" },
                         "product": { "type": "integer" },
                         "order": { "type": "integer", "index": false }
                     }
