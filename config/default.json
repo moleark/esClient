@@ -70,6 +70,17 @@
                     }
                 }
             }
+        },
+        "productstandardsample": {
+            "index": "productstandardsample",
+            "body": {
+                "mappings": {
+                    "properties": {
+                        "id": {"type": "long"},
+                        "content": {"type": "flattened"}
+                    }
+                }
+            }
         }
     },
     "index_batch_size": 100,
@@ -91,6 +102,14 @@
             "where   a.$unit = 24 and a.salesregion = ? ", 
             "and `order` > ? ",
             " order by `order` ",
+            "limit 500;"
+        ],
+        "productstandardsample": [
+            "select product as id, content ",
+            "from product$test.tv_productstandardsample as pss ",
+            "where pss.$unit = 24 and pss.product > ? ",
+            "and exists (select 1 from product$test.tv_productcache pc where pc.$unit = 24 and pc.product = pss.product and pc.salesregion = 1) ",
+            "order by pss.$unit, pss.product",
             "limit 500;"
         ]
     },
